@@ -38,12 +38,12 @@ $(document).ready(function () {
 
         if (re.test($('#email').val())) {
             $('#email').next().hide();
-            is_email = false;
+            is_email = true;
         }
         else {
             $('#email').next().html('你输入的邮箱格式不正确')
             $('#email').next().show();
-            is_email = true;
+            is_email = false;
         }
 
     }
@@ -51,7 +51,6 @@ $(document).ready(function () {
     function check_cpwd() {
         let cpwd = $("#cpwd");
         let pwd = cpwd.val();
-        console.log('pwd=' + $("#pwd").val() + "---cpwd=" + pwd);
         if (pwd === $("#pwd").val()) {
             cpwd.next().hide();
             is_cpwd = true;
@@ -68,10 +67,10 @@ $(document).ready(function () {
         if (len < 6 || len > 20) {
             pwd.next().html('请输入6-20位密码');
             pwd.next().show();
-            is_pwd = true;
+            is_pwd = false;
         } else {
             pwd.next().hide();
-            is_pwd = false;
+            is_pwd = true;
         }
     }
 
@@ -81,24 +80,26 @@ $(document).ready(function () {
         if (len < 5 || len > 20) {
             user_name.next().html('请输入5-20个字符的用户名');
             user_name.next().show();
-            is_user_name = true;
-        } else {
             is_user_name = false;
-            user_name.next().hide();
+        } else {
+            $.get("/user/register_exist/?uname=" + user_name.val(), function (data,status) {
+                if (data.count > 0) {
+                    user_name.next().html('账户已经存在').show();
+                    is_user_name = false;
+                } else {
+                    is_user_name = true;
+                    user_name.next().hide();
+                }
+            });
         }
     }
 
-    $("#reg_sub").click(function () {
+    $("#reg_sub").submit(function () {
         check_user();
         check_pwd();
         check_cpwd();
         check_email();
 
-        if (is_user_name && is_pwd && is_cpwd && is_email && is_argree) {
-            $("#reg_sub").submit()
-        }else {
-
-            return false;
-        }
+        return is_user_name && is_pwd && is_cpwd && is_email && is_argree;
     });
 });
