@@ -3,25 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/base_foot.css">
+    <title>{{title}}天天生鲜-注册</title>
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    {% block link %}
-
-    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-    {% block script %}
-
-    {% endblock %}
+    {%block head%}
+    {%endblock head%}
 </head>
 <body>
+{% block header %}
+{% endblock header %}
+{%block body%}
+{%endblock body%}
 
-
-{% block body %}
-
-{% endblock %}
-
-<div class="footer">
+{%block foot%}
+<div class="footer no-mp">
     <div class="foot_link">
         <a href="#">关于我们</a>
         <span>|</span>
@@ -30,11 +26,11 @@
         <a href="#">招聘人才</a>
         <span>|</span>
         <a href="#">友情链接</a>
-        <span>|</span>
-        <p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
-        <p>电话：010-****888 京ICP备*******8号</p>
     </div>
+    <p>CopyRight © 2016 北京天天生鲜信息技术有限公司 All Rights Reserved</p>
+    <p>电话：010-****888 京ICP备*******8号</p>
 </div>
 
 </body>
 </html>
+{%endblock foot%}
