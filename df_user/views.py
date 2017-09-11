@@ -94,7 +94,7 @@ def info(request):
     user_email = UserInfo.objects.get(id=request.session['user_id']).uemail
 
     # 最近浏览
-    goods_ids = request.COOKIES.get('goods_ids', '')
+    goods_ids = request.COOKIES.get('goods_ids', '17')
     goods_id_list = goods_ids.split(',')
     goods_list = []
     for goods_id in goods_id_list:
